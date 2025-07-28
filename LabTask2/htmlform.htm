@@ -1,0 +1,92 @@
+<html>
+<head>
+    <title>JS Example</title>
+</head>
+<body>
+        <h1>Login Page</h1>
+        <form method="post" action="htmlform.htm" enctype="multipart/form-data" onsubmit="return loginCheck()">
+            <fieldset>
+            Name: <br/>  <input type="text" name="name" value="" id="name" onblur="checkName()" >
+                        <p id="nameError"></p> 
+            Email: <br/> <input type="text" name="email" id="email" onblur="checkEmail()">
+                        <p id="emailError"></p>
+            Gender:
+                   <input type="radio" name="gender" value="Male"> Male
+                   <input type="radio" name="gender" value="Female"> Female
+                   <input type="radio" name="gender" value="Other"> Other
+                   <p id="genderError"></p>
+            DOB:
+                <input type="number" id="dd" placeholder="DD" min="1" max="31" onblur="checkDOB()">
+                <input type="number" id="mm" placeholder="MM" min="1" max="12" onblur="checkDOB()">
+                <input type="number" id="yyyy" placeholder="YYYY" min="1900" max="2016" onblur="checkDOB()">
+                <p id="dobError"></p>
+
+
+                        <input type="submit" name="" value="Submit">
+                        <p id="success"></p>
+            </fieldset>
+        </form>
+
+        <script>
+           
+            let username = "";
+          
+            
+            let nameError = document.getElementById('nameError');
+            let emailError = document.getElementById('emailError');
+            let submitError = document.getElementById('submitError');
+
+
+            function checkName() {
+            let name = document.getElementById('name').value;
+            const namePattern = "" ;
+            
+            if (name === "") {
+                nameError.innerHTML = "Please Type Your name first!";
+                nameError.style.color = 'red';
+            } else if (name.split(" ").length < 2 || !namePattern.test(name)) {
+                nameError.innerHTML = "Must contain at least two words and valid characters.";
+                nameError.style.color = 'red';
+                return false;
+            } else {
+                nameError.innerHTML = "";
+                return true;
+            }
+        }
+        function checkEmail() {
+            let email = document.getElementById('email').value;
+            const emailPattern = "";
+
+            if (email === "") {
+                emailError.innerHTML = "Type your Email!";
+                emailError.style.color = 'red';
+            } else if (!emailPattern.test(email)) {
+                emailError.innerHTML = "Invalid email format.";
+                emailError.style.color = 'red';
+            } else {
+                emailError.innerHTML = "";
+            }
+        }
+
+
+        function validateForm() {
+            let name = document.getElementById('name').value.trim();
+            let email = document.getElementById('email').value.trim();
+
+            checkName();
+            checkEmail();
+
+            if (nameError.innerHTML === "" && emailError.innerHTML === "") {
+                alert("Form submitted successfully!");
+                return true;
+            } else {
+                submitError.innerHTML = "Please fix the errors!.";
+                submitError.style.color = 'red';
+                return false;
+            }
+        }
+            
+
+</script>
+</body>
+</html>
